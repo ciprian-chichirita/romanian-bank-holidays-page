@@ -94,7 +94,10 @@ window.addEventListener("load", () => {
     year = year || parseInt(moment().format("YYYY"), 10);
     const legalBankHolidaysJSON = legalBankHolidays(year);
     bankHolidaysOutput.value = JSON.stringify(legalBankHolidaysJSON);
-    if(window.parent && typeof window.parent.sendBankHolidays === "function") {
-      sendBankHolidays(JSON.stringify(legalBankHolidaysJSON));
+    if(window.parent) {
+      window.parent.postMessage(JSON.stringify({
+        type: "bank-holidays",
+        value: legalBankHolidaysJSON
+      }),"*");
     }
 });
