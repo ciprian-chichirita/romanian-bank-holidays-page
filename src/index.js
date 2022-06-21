@@ -94,4 +94,7 @@ window.addEventListener("load", () => {
     year = year || parseInt(moment().format("YYYY"), 10);
     const legalBankHolidaysJSON = legalBankHolidays(year);
     bankHolidaysOutput.value = JSON.stringify(legalBankHolidaysJSON);
+    if(typeof iframeLoaded === "function") {
+      iframeLoaded(JSON.stringify(legalBankHolidaysJSON));
+    }
 });
